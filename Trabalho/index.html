@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <h2>Calculadora de Juros</h2>
+    <input type="text" id="principal" placeholder="Valor Principal">
+    <input type="text" id="interestRate" placeholder="Taxa de Juros">
+    <input type="text" id="period" placeholder="Período">
+    <button id="simpleInterestButton">Juros Simples</button>
+    <button id="compoundInterestButton">Juros Compostos</button>
+    <div id="result"></div>
+    <div id="error"></div>
+  </div>
+
+  <script>
+    function calculateSimpleInterest() {
+      var principal = parseFloat(document.getElementById("principal").value);
+      var interestRate = parseFloat(document.getElementById("interestRate").value);
+      var period = parseFloat(document.getElementById("period").value);
+
+      if (isNaN(principal) || isNaN(interestRate) || isNaN(period)) {
+        document.getElementById("error").innerHTML = "Por favor, insira valores numéricos válidos.";
+        document.getElementById("result").innerHTML = "";
+      } else {
+        var simpleInterest = principal + (principal * interestRate * period);
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("result").innerHTML = "Juros Simples: " + simpleInterest.toFixed(2);
+      }
+    }
+
+    function calculateCompoundInterest() {
+      var principal = parseFloat(document.getElementById("principal").value);
+      var interestRate = parseFloat(document.getElementById("interestRate").value);
+      var period = parseFloat(document.getElementById("period").value);
+
+      if (isNaN(principal) || isNaN(interestRate) || isNaN(period)) {
+        document.getElementById("error").innerHTML = "Por favor, insira valores numéricos válidos.";
+        document.getElementById("result").innerHTML = "";
+      } else {
+        var compoundInterest = principal * Math.pow(1 + (interestRate / 100), period);
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("result").innerHTML = "Juros Compostos: " + compoundInterest.toFixed(2);
+      }
+    }
+
+    document.getElementById("simpleInterestButton").addEventListener("click", calculateSimpleInterest);
+    document.getElementById("compoundInterestButton").addEventListener("click", calculateCompoundInterest);
+  </script>
+</body>
+</html>
